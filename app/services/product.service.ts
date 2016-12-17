@@ -60,7 +60,7 @@ export class ProductService {
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
         return this._http
-                   .get(`${this._backendUri}/products?_sort=publishedDate&_order=DESC`)
+                   .get(`${this._backendUri}/products`)
                    .map((data: Response): Product[] => Product.fromJsonToList(data.json()));
     }
 
