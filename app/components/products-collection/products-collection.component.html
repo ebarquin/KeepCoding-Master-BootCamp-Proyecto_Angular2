@@ -15,7 +15,7 @@
             *ngFor="let product of _products"
             [data]="product"
             class="column"
-            (productSelected)="showProductDetails($event)">
+            (selectedProduct)="showProductDetails($event)">
         </product>
     </div>
     <div *ngIf="_products?.length === 0" class="text-center">
