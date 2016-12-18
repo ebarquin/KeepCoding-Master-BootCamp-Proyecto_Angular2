@@ -46,9 +46,12 @@ export class ProductService {
         |   - Búsqueda por estado:                                         |
         |       state=x (siendo x el estado)                               |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
+        let organizeProducts:string= "/products?_sort=publishedDate&_order=DESC"
+        let text: string = filter.text
+        
+        
         return this._http
-                   .get(`${this._backendUri}/products?_sort=publishedDate&_order=DESC`)
+                   .get(`${this._backendUri}${organizeProducts}$(q=text)`)
                    .map((data: Response): Product[] => Product.fromJsonToList(data.json()));
     }
 
