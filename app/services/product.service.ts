@@ -15,23 +15,16 @@ export class ProductService {
         private _http: Http) { }
 
     getProducts(filter: ProductFilter = undefined): Observable<Product[]> {
+        
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('_sort','publishedDate');
+        params.set('_order', 'DESC');
 
+        if (filter){
+            params.set('q', filter.text);
+            params.set('category.id', filter.category)
+        }
 
-        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Red Path                                                         |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Pide al servidor que te retorne los productos filtrados por      |
-        | texto y/ por categoría.                                          |
-        |                                                                  |
-        | En la documentación de 'JSON Server' tienes detallado cómo       |
-        | filtrar datos en tus peticiones, pero te ayudo igualmente. La    |
-        | querystring debe tener estos parámetros:                         |
-        |                                                                  |
-        |   - Búsqueda por texto:                                          |
-        |       q=x (siendo x el texto)                                    |
-        |   - Búsqueda por categoría:                                      |
-        |       category.id=x (siendo x el identificador de la categoría)  |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
         /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
         | Yellow Path                                                      |
@@ -46,12 +39,9 @@ export class ProductService {
         |   - Búsqueda por estado:                                         |
         |       state=x (siendo x el estado)                               |
         |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-        let organizeProducts:string= "/products?_sort=publishedDate&_order=DESC"
-        let text: string = filter.text
-        
-        
+
         return this._http
-                   .get(`${this._backendUri}${organizeProducts}$(q=text)`)
+                   .get(`${this._backendUri}/products`, {search: params})
                    .map((data: Response): Product[] => Product.fromJsonToList(data.json()));
     }
 
