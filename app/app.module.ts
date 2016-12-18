@@ -20,12 +20,7 @@ import { ProductService } from "./services/product.service";
 import { SoldProductsResolve } from "./services/sold-products-resolve.service";
 import { UserProfileComponent } from "./components/user-profile/user-profile.component";
 import { UserService } from "./services/user.service";
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-| Blue Path                                                        |
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-| No olvides declarar PublicationDatePipe en el módulo.            |
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+import { PublicationDatePipe } from "./pipes/publication-date.pipe"
 
 @NgModule({
     imports: [
@@ -42,7 +37,8 @@ import { UserService } from "./services/user.service";
         ProductFilterComponent,
         ProductResetComponent,
         ProductsCollectionComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        PublicationDatePipe
     ],
     providers: [
         BackendUriProvider,
