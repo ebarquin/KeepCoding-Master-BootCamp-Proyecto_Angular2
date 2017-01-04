@@ -23,22 +23,9 @@ export class ProductService {
         if (filter){
             params.set('q', filter.text);
             params.set('category.id', filter.category)
+            params.set('state', filter.state);
         }
 
-
-        /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Yellow Path                                                      |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
-        | Pide al servidor que te retorne los productos filtrados por      |
-        | estado.                                                          |
-        |                                                                  |
-        | En la documentación de 'JSON Server' tienes detallado cómo       |
-        | filtrar datos en tus peticiones, pero te ayudo igualmente. La    |
-        | querystring debe tener estos parámetros:                         |
-        |                                                                  |
-        |   - Búsqueda por estado:                                         |
-        |       state=x (siendo x el estado)                               |
-        |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
         return this._http
                    .get(`${this._backendUri}/products`, {search: params})
